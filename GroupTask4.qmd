@@ -1,7 +1,26 @@
 ---
 title: "GroupTask4"
-format: pdf
+format:
+  pdf:
+    pdf-engine: lualatex
+    classoption: landscape
+    colorlinks: true
+    linkcolor: black
+    urlcolor: black
+    toccolor: black
+    keep-tex: true
+    toc: true
+    number-sections: true
+header-includes:
+  - \usepackage{placeins}
+  - \usepackage{float}
+  - \floatplacement{table}{H}
+  - \AtBeginDocument{\let\oldsection\section
+                     \renewcommand{\section}{\FloatBarrier\oldsection}}
 editor: visual
+template: UH_Template.tex
 ---
 
-## Check In 1
+\newpage
+
+# Check In 1
