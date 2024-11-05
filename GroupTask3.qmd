@@ -35,24 +35,19 @@ format:
     cite-method: biblatex
 bibliography: references.bib
 ---
-
+\newpge
 # Introduction
-
 Example citation [@asgari2022].
 
+\newpage
 # Background
-
 More discussion of house fly immune systems [@asgari2022].
 
+\newpage
 # Methodology
-
 We can put examples of code here if we want to include it, if not we can use include=FALSE
 
-```{python}
-# This is an example of python code box
-```
-
+\newpage
 # References {.unnumbered}
-
 ::: {#refs}
 :::
