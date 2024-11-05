@@ -24,31 +24,61 @@ author:
         country: USA
 abstract: |
   Abstract goes here.
-keywords: [keyword1, keyword2, keyword 3]
-reference-section-title: References
+keywords: [keyword1, keyword2, keyword3]
 format:
-  acm-pdf:
+  pdf:
     pdf-engine: lualatex
+    documentclass: report
     classoption: landscape
-    colorlinks: true
-    linkcolor: black
-    urlcolor: black
-    toccolor: black
+    geometry: 
+      - margin=1in
+      - top=0.5in
     keep-tex: true
     toc: true
     number-sections: true
-header-includes:
-  - \usepackage{placeins}
-  - \usepackage{float}
-  - \floatplacement{table}{H}
-  - \AtBeginDocument{\let\oldsection\section
-                     \renewcommand{\section}{\FloatBarrier\oldsection}}
-editor: visual
+    include-in-header:
+      - text: |
+          \usepackage[utf8]{inputenc}
+          \usepackage{graphicx}
+          \usepackage[x11names,table]{xcolor}
+          \usepackage{fancyhdr}
+          \usepackage{tcolorbox}
+          \usepackage{longtable}
+          \usepackage{booktabs}
+          \usepackage{setspace}
+          \usepackage{pdflscape}
+          \usepackage{caption}
+          \usepackage{float}
+          \usepackage{etex}
+          \usepackage{luatex85}
+          \usepackage{etoc}
+          \usepackage{expl3}
+          \setlength{\headheight}{3cm}
+          \renewcommand{\thesection}{\arabic{section}.0}
+          \pagestyle{fancy}
+          \fancyhf{}
+          \fancyhead[C]{\includegraphics[width=0.8\textwidth]{UHLogo_Long.png}}
+          \fancyfoot[C]{\thepage}
+          \fancyfoot[L]{Yves-Langston Mays}
+          \fancyfoot[R]{\today}
+          \setcounter{secnumdepth}{3}
+          \setcounter{tocdepth}{3}
+          \etocsetlevel{section}{0}
+          \etocsetnexttocdepth{3}
+          \directlua{
+            pdf.setminorversion(7)
+            pdf.setobjcompresslevel(0)
+            pdf.setcompresslevel(0)
+          }
+          \maxdeadcycles=1000
+          \extrafloats{1000}
+          \ExplSyntaxOn
+          \dim_new:N \g_fpi_maxheight_dim
+          \dim_gset:Nn \g_fpi_maxheight_dim {16383pt}
+          \ExplSyntaxOff
+          \providecommand{\tightlist}{%
+            \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 template: UH_Template.tex
 ---
 
-\newpage
-
-# Introduction
-
-# Background
+# 
