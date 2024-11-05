@@ -35,19 +35,73 @@ format:
     cite-method: biblatex
 bibliography: references.bib
 ---
+
 \newpge
+
 # Introduction
+
 Example citation [@asgari2022].
 
 \newpage
+
 # Background
+
 More discussion of house fly immune systems [@asgari2022].
 
 \newpage
+
 # Methodology
+
+```{r}
+#| include: false
+#libraries
+library(zoo)
+library(sf)
+library(OpenStreetMap)
+
+```
+
+```{r}
+#| include: false
+#data collection and prep
+hurdat2 = read.csv("hurdat2-1851-2023-051124.txt", header=F, as.is=T)
+gulf_cities = read.csv("Gulf_Cities.csv", header=F, as.is=T)
+
+names(hurdat2) = c("DATE", "TIME_UTC", "POINT_TYPE", "STATUS", 
+               "LATITUDE", "LONGITUDE", "WINDSPEED_KT", "PRESURE_MB", 
+               "NE_34KT", "SE_34KT", "NW_34_KT", "SW_34_KT",
+               "NE_50KT", "SE_50KT", "NW_50_KT", "SW_50_KT",
+               "NE_64KT", "SE_64KT", "NW_64_KT", "SW_64_KT")
+
+panel = cbind(HID = NA, HNAME = NA, hurdat2)
+
+panel$HID = ifelse(grepl("AL|EP|CP", panel$DATE), panel$DATE, NA)
+
+panel$HNAME = ifelse(grepl("AL|EP|CP", panel$DATE), panel$TIME_UTC, NA)
+
+panel$HID = na.locf(panel$HID)
+
+panel$HNAME = na.locf(panel$HNAME)
+
+panel = panel[!grepl("AL|EP|CP", panel$DATE), ]
+
+panel$LATITUDE = trimws(panel$LATITUDE)
+panel$LONGITUDE = trimws(panel$LONGITUDE)
+panel$STATUS = trimws(panel$STATUS)
+
+panel$LATITUDE = ifelse(grepl("S", panel$LATITUDE), paste0("-", panel$LATITUDE), panel$LATITUDE)
+panel$LONGITUDE = ifelse(grepl("W", panel$LONGITUDE), paste0("-", panel$LONGITUDE), panel$LONGITUDE)
+
+panel$LATITUDE = as.numeric(sub("N|S", "", panel$LATITUDE))
+panel$LONGITUDE = as.numeric(sub("E|W", "", panel$LONGITUDE))
+
+```
+
 We can put examples of code here if we want to include it, if not we can use include=FALSE
 
 \newpage
+
 # References {.unnumbered}
+
 ::: {#refs}
 :::
