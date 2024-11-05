@@ -8,7 +8,6 @@ author:
         department: Natural Sciences & Mathematics
         city: Houston
         country: USA
-    orcid: 0000-0000-0000-0000
   - name: Author 2
     email: email
     affiliation:
@@ -16,7 +15,6 @@ author:
         department: Natural Sciences & Mathematics
         city: Houston
         country: USA
-    orcid: 0000-0000-0000-0000
   - name: Author 3
     email: email
     affiliation:
@@ -24,7 +22,6 @@ author:
         department: Natural Sciences & Mathematics
         city: Houston
         country: USA
-    orcid: 0000-0000-0000-0000
 abstract: |
   Abstract goes here. 
 keywords: [keyword1, keyword2, keyword3]
@@ -35,7 +32,27 @@ format:
     keep-tex: true
     toc: true
     number-sections: true
+    cite-method: biblatex
 bibliography: references.bib
 ---
 
 # Introduction
+
+Example citation [@asgari2022].
+
+# Background
+
+More discussion of house fly immune systems [@asgari2022].
+
+# Methodology
+
+We can put examples of code here if we want to include it, if not we can use include=FALSE
+
+```{python}
+# This is an example of python code box
+```
+
+# References {.unnumbered}
+
+::: {#refs}
+:::
