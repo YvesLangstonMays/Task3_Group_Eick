@@ -9,14 +9,14 @@ author:
         city: Houston
         country: USA
   - name: Author 2
-    email: email
+    email: email2@uh.edu
     affiliation:
       - name: University of Houston Main Campus
         department: Natural Sciences & Mathematics
         city: Houston
         country: USA
   - name: Author 3
-    email: email
+    email: email3@uh.edu
     affiliation:
       - name: University of Houston Main Campus
         department: Natural Sciences & Mathematics
