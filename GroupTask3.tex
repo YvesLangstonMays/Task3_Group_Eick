@@ -1,5 +1,4 @@
 \documentclass{report}
-
 % Encoding and Packages
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
@@ -17,13 +16,14 @@
 \usepackage{luatex85}
 \usepackage{etoc}
 \usepackage{expl3}
+% Bibliography package
+\usepackage[backend=biber,style=authoryear]{biblatex}
+\addbibresource{references.bib}
 
 % Header height
 \setlength{\headheight}{3cm}
-
 % Section numbering
 \renewcommand{\thesection}{\arabic{section}.0}
-
 % Fancy Header and Footer Setup
 \pagestyle{fancy}
 \fancyhf{}
@@ -31,36 +31,29 @@
 \fancyfoot[C]{\thepage}
 \fancyfoot[L]{Yves-Langston Mays}
 \fancyfoot[R]{\today}
-
 % Table of Contents depth
 \setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{3}
-
 % Etoc settings
 \etocsetlevel{section}{0}
 \etocsetnexttocdepth{3}
-
 % Increase TeX's main memory size
 \directlua{
   pdf.setminorversion(7)
   pdf.setobjcompresslevel(0)
   pdf.setcompresslevel(0)
 }
-
 % Increase LaTeX counters
 \maxdeadcycles=1000
 \extrafloats{1000}
-
 % Increase TeX parameters
 \ExplSyntaxOn
 \dim_new:N \g_fpi_maxheight_dim
 \dim_gset:Nn \g_fpi_maxheight_dim {16383pt}
 \ExplSyntaxOff
-
 % Define tightlist command
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-
 % Hyperref settings (should be last)
 \usepackage{hyperref}
 \hypersetup{
@@ -71,12 +64,7 @@
     pdfborder={0 0 0},
 }
 
-
-
-
-
 \begin{document}
-
 % Title Page
 \begin{titlepage}
     \centering
@@ -87,7 +75,6 @@
     \includegraphics[width=0.5\textwidth]{UHLogo_Long.png}
     \vspace{0.8cm}
 \end{titlepage}
-
 % Table of Contents
 \begingroup
 \let\clearpage\relax
@@ -95,8 +82,24 @@
 \endgroup
 \relax
 \relax
-
 % Body Content Placeholder
-\chapter{Introduction}\label{introduction}
+\section{Introduction}\label{introduction}
 
+Example citation \autocite{asgari2022}.
+
+\section{Background}\label{background}
+
+More discussion of house fly immune systems \autocite{asgari2022}.
+
+\section{Methodology}\label{methodology}
+
+We can put examples of code here if we want to include it, if not we can
+use include=FALSE
+
+\section*{References}\label{references}
+\addcontentsline{toc}{section}{References}
+
+\printbibliography[heading=none]
+
+% Print bibliography
 \end{document}
