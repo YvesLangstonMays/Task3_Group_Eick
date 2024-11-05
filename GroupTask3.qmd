@@ -22,8 +22,12 @@ author:
         department: Natural Sciences & Mathematics
         city: Houston
         country: USA
+abstract: |
+  Abstract goes here.
+keywords: [keyword1, keyword2, keyword 3]
+reference-section-title: References
 format:
-  pdf:
+  acm-pdf:
     pdf-engine: lualatex
     classoption: landscape
     colorlinks: true
