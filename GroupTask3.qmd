@@ -1,0 +1,50 @@
+---
+title: "Group Task 3"
+author: 
+  - name: Yves-Langston Mays
+    email: ymmays@cougarnet.uh.edu
+    affiliation:
+      - name: University of Houston Main Campus
+        department: Natural Sciences & Mathematics
+        city: Houston
+        country: USA
+  - name: Author 2
+    email: email
+    affiliation:
+      - name: University of Houston Main Campus
+        department: Natural Sciences & Mathematics
+        city: Houston
+        country: USA
+  - name: Author 3
+    email: email
+    affiliation:
+      - name: University of Houston Main Campus
+        department: Natural Sciences & Mathematics
+        city: Houston
+        country: USA
+format:
+  pdf:
+    pdf-engine: lualatex
+    classoption: landscape
+    colorlinks: true
+    linkcolor: black
+    urlcolor: black
+    toccolor: black
+    keep-tex: true
+    toc: true
+    number-sections: true
+header-includes:
+  - \usepackage{placeins}
+  - \usepackage{float}
+  - \floatplacement{table}{H}
+  - \AtBeginDocument{\let\oldsection\section
+                     \renewcommand{\section}{\FloatBarrier\oldsection}}
+editor: visual
+template: UH_Template.tex
+---
+
+\newpage
+
+# Introduction
+
+# Background
