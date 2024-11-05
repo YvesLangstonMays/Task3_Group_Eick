@@ -9,7 +9,6 @@ author:
         city: Houston
         country: USA
   - name: Author 2
-    email: email
     email: email2@uh.edu
     affiliation:
       - name: University of Houston Main Campus
@@ -17,7 +16,6 @@ author:
         city: Houston
         country: USA
   - name: Author 3
-    email: email
     email: email3@uh.edu
     affiliation:
       - name: University of Houston Main Campus
@@ -38,12 +36,8 @@ format:
 bibliography: references.bib
 ---
 
-<<<<<<< HEAD
-\newpge
-
-=======
 \newpage
->>>>>>> 19001a61b4b3ce6d731b22ee497286c7ac3b0eb0
+
 # Introduction
 
 Example citation [@asgari2022].
@@ -64,7 +58,6 @@ More discussion of house fly immune systems [@asgari2022].
 library(zoo)
 library(sf)
 library(OpenStreetMap)
-
 ```
 
 ```{r}
@@ -107,8 +100,6 @@ We can put examples of code here if we want to include it, if not we can use inc
 
 \newpage
 
-<<<<<<< HEAD
-=======
 # Results
 
 \newpage
@@ -117,7 +108,6 @@ We can put examples of code here if we want to include it, if not we can use inc
 
 \newpage
 
->>>>>>> 19001a61b4b3ce6d731b22ee497286c7ac3b0eb0
 # References {.unnumbered}
 
 ::: {#refs}
