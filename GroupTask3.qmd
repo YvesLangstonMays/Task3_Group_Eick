@@ -59,6 +59,7 @@ library(zoo)
 library(sf)
 library(leaflet)
 library(dplyr)
+library(ggplot2)
 ```
 
 ```{r}
@@ -192,8 +193,50 @@ leaflet(recent_gulf_storms) %>%
 
 
 ```
-We can put examples of code here if we want to include it, if not we can use include=FALSE
 
+
+```{r}
+yearly_storms <- recent_gulf_storms %>%
+  group_by(YEAR) %>%
+  summarize(storm_count = n())
+
+View(yearly_storms)
+
+monthly_storms <- recent_gulf_storms %>%
+  mutate(MONTH = as.numeric(substr(DATE, 5, 6))) %>%
+  group_by(MONTH) %>%
+  summarize(storm_count = n())
+
+View(monthly_storms)
+
+status_count <- recent_gulf_storms %>%
+  group_by(STATUS) %>%
+  summarize(count = n())
+
+View(status_count)
+
+```
+
+
+``` {r}
+ggplot(yearly_storms, aes(x = YEAR, y = storm_count)) +
+  geom_line(color = "blue") +
+  geom_point() +
+  labs(title = "year storm count from 99-23",
+       x = "Year",
+       y = "# of Storms")
+
+ggplot(monthly_storms, aes(x = MONTH, y = storm_count)) +
+  geom_col(fill = "steelblue") +
+  labs(title = "monthly storm freq",
+       x = "Month",
+       y = "# of Storms") +
+  scale_x_continuous(breaks = 1:12,
+                     labels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+                                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"))
+
+
+```
 
 \newpage
 
