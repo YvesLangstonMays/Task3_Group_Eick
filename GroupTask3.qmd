@@ -166,7 +166,7 @@ recent_gulf_storms <- gulf_storms %>%
 leaflet(recent_gulf_storms) %>%
   addTiles() %>%
   setView(lng = -90, lat = 25, zoom = 5) %>%
-  addPolylines(
+  addCircleMarkers(
     lng = ~LONGITUDE,
     lat = ~LATITUDE,
     color = ~case_when(
@@ -174,8 +174,8 @@ leaflet(recent_gulf_storms) %>%
       STATUS == "TS" ~ "orange",
       TRUE ~ "blue"
     ),
-    weight = 1,
-    group = ~HID,
+    radius = 3,
+    clusterOptions = markerClusterOptions(), # This line adds clustering to the points
     popup = ~paste(
       "Storm Name:", HNAME, "<br>",
       "Date:", DATE, "<br>",
@@ -189,6 +189,7 @@ leaflet(recent_gulf_storms) %>%
     labels = c("Hurricane", "Tropical Storm", "Other"),
     title = "Storm Status"
   )
+
 
 ```
 We can put examples of code here if we want to include it, if not we can use include=FALSE
