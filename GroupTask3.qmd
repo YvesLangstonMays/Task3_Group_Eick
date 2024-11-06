@@ -46,14 +46,12 @@ Example citation [@asgari2022].
 
 # Background
 
-More discussion of house fly immune systems [@asgari2022].
-
 \newpage
 
 # Methodology
 
 ```{r}
-#| include: false
+#| echo: false
 #libraries
 library(zoo)
 library(sf)
@@ -63,7 +61,7 @@ library(ggplot2)
 ```
 
 ```{r}
-#| include: false
+#| echo: false
 #data collection and prep
 hurdat2 = read.csv("hurdat2-1851-2023-051124.txt", header=F, as.is=T)
 
@@ -106,9 +104,8 @@ gulf_storms = subset(panel,
 
 ```
 
-
-
 ```{r}
+#| results: asis
 gulf_cities <- data.frame(
   City = c("New Orleans", "Houston", "Tampa", "Miami", "Corpus Christi", 
            "Pensacola", "Mobile", "Galveston", "Biloxi", "Key West",
@@ -152,7 +149,6 @@ cat("\nDate range:", min(gulf_storms$DATE), "to", max(gulf_storms$DATE))
 
 ```
 
-
 ```{r}
 # I will attempt to use leaflet correctly to create an interactive map
 # Rendering this map is computationally expensive....
@@ -194,8 +190,8 @@ leaflet(recent_gulf_storms) %>%
 
 ```
 
-
 ```{r}
+
 yearly_storms <- recent_gulf_storms %>%
   group_by(YEAR) %>%
   summarize(storm_count = n())
@@ -217,8 +213,7 @@ View(status_count)
 
 ```
 
-
-``` {r}
+```{r}
 ggplot(yearly_storms, aes(x = YEAR, y = storm_count)) +
   geom_line(color = "blue") +
   geom_point() +
@@ -234,6 +229,26 @@ ggplot(monthly_storms, aes(x = MONTH, y = storm_count)) +
   scale_x_continuous(breaks = 1:12,
                      labels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", 
                                 "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"))
+
+ggplot(status_count, aes(x = STATUS, y = count, fill = STATUS)) +
+  geom_bar(stat = "identity") +
+  labs(title = "strm count by status",
+       x = "Status",
+       y = "# of Storms") +
+  scale_fill_manual(values = c("HU" = "red", "TS" = "orange", "TD" = "blue"))
+
+
+intensity_trend <- recent_gulf_storms %>%
+  group_by(YEAR) %>%
+  summarize(avg_windspeed = mean(WINDSPEED_KT, na.rm = TRUE))
+
+ggplot(intensity_trend, aes(x = YEAR, y = avg_windspeed)) +
+  geom_line(color = "darkred") +
+  geom_point() +
+  labs(title = "Avg Storm Intensity Over Time 99-23",
+       x = "Year",
+       y = "Avg Wind Speed (kt)")
+
 
 
 ```
