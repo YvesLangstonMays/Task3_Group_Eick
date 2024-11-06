@@ -57,7 +57,7 @@ More discussion of house fly immune systems [@asgari2022].
 #libraries
 library(zoo)
 library(sf)
-library(OpenStreetMap)
+library(leaflet)
 ```
 
 ```{r}
@@ -97,6 +97,7 @@ panel$LONGITUDE = as.numeric(sub("E|W", "", panel$LONGITUDE))
 ```
 
 We can put examples of code here if we want to include it, if not we can use include=FALSE
+
 
 \newpage
 
