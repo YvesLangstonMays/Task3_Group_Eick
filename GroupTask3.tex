@@ -149,53 +149,49 @@ expect as it passes. Governments can use this information to predict
 what cities will require the most aid. Insurance companies can use this
 data to decide what services are best suited to a specific location.
 
-This task aims to use historical data on hurricanes to predict future
-hurricane activity and highlight cities that are at most risk. The
-historical hurricane data from the National Hurricane Center's HURDAT2
-database, contains hurricane data in the Atlantic from 1851 to 2023.
-HURDAT2 records the six-hourly information on the location, maximum
-winds, central pressure, and (beginning in 2004) size of all known
-tropical cyclones and subtropical cyclones {[}2{]}. Along with a list of
-25 cities and their locations in the Gulf of Mexico, 3 analyses will be
-performed oh HURDAT2 to analyze and predict the storm tracks in the Gulf
-of Mexico.
-
-The last 25 (1999-2024) years worth of storm tracks will be first
-visualized and analyzed on the over the Gulf of Mexico to identify
-common patterns and trends of the storm tracks. The visualization and
-the manual analysis provides a good general overview of how these storms
-move, where they are the most intense, and what places receive the most
-storms.
-
-The second analysis examines how certain factors like sea surface
-temperatures and El Nino/La Nina patterns affect hurricane activity.
-Spatial correlation analysis between these factors and hurricane
-activity will be used to achieve this. The correlation analysis will
-show how certain weather phenomena can affect hurricane activity to
-better predict hurricane activity.
-
-The last analysis uses non-parametric density estimation to assess the
-hurricane risk based on past trajectories and severity. This can provide
-insight on where hurricanes are more likely to appear and what routes
-they take. It can assess what regions will receive the most intense
-storms. Paired with the spatial correlation analysis, the information
-provided from the non-parametric density estimation can highlight what
-cities are most at risk in the Gulf of Mexico.
-
-These 3 analyses can provide valuable insight to the behavior and
-activity of future hurricanes. Knowing the behavior and patterns of the
-hurricanes, knowing what cities and regions are at the most risk from
-hurricane activity and how different factors play a role in hurricane
-activity can help people better prepare for hurricanes and minimize the
-losses caused by these storms. Meteorologists can use these predictions
-to better inform people about the route, severity of storms and what to
-expect as it passes. Governments can use this information to predict
-what cities will require the most aid. Insurance companies can use this
-data to decide what services are best suited to a specific location
-
 \section{2.0 Background}\label{background}
 
-Background stuff here
+\section{2.0 Background}\label{background-1}
+
+The data source, HURDAT2, short for Hurricane Database 2 from the
+National Hurricane Center, provides detailed hurricane tracks from 1851
+to 2023. This database records measurements of critical parameters
+including location coordinates, maximum wind speeds, and central
+pressure. Since 2004, the database has also included storm size data,
+enhancing our understanding of hurricane characteristics.
+
+Our report encompasses 25 cities across the Gulf of Mexico region,
+representing diverse geographical and political jurisdictions. Ten U.S.
+cities form the northern boundary of the study area, including major
+metropolitan centers like New Orleans, Houston, and Miami, alongside
+significant coastal cities such as Tampa, Corpus Christi, Pensacola,
+Mobile, Galveston, Biloxi, and Key West. Along the western and southern
+Gulf coast, nine Mexican cities are included: Veracruz, Tampico, and
+Campeche serve as major ports, while Cancún represents a vital tourism
+center. The study also includes Mérida, Ciudad del Carmen, Progreso,
+Coatzacoalcos, and Tuxpan, which are crucial to Mexico's coastal
+economy. The Caribbean region is represented by Havana, Varadero, and
+Cienfuegos, along with key island locations including Belize City,
+George Town, and Nassau.
+
+Natural factors significantly influence hurricane activity in the Gulf
+region, with varying degrees of impact severity. Sea surface
+temperatures directly affect hurricane formation and intensification,
+while El Niño/La Niña patterns influence atmospheric conditions and
+storm frequency. The Atlantic Multidecadal Oscillation affects long-term
+hurricane activity cycles, and Saharan dust levels can suppress
+hurricane development. Upper-level wind patterns play a crucial role in
+determining storm trajectories and development potential.
+
+Each city's unique geographical position and environmental
+characteristics contribute to its specific hurricane risk profile. This
+research aims to quantify specific hurricane risks for each city,
+identify correlations between environmental factors and hurricane
+patterns, and develop location-specific risk assessment models.
+
+The integration of these methods below will support and inform
+decision-making processes for protecting coastal communities from future
+hurricane impacts.
 
 \section{3.0 Methodology}\label{methodology}
 
