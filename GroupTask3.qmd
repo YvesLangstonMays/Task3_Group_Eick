@@ -35,9 +35,6 @@ format:
     cite-method: biblatex
 bibliography: references.bib
 ---
-
-\newpage
-
 # Introduction
 
 The objective of this Task is to analyze and assess the hurricane risk of 25 cities in the Gulf of Mexico.
