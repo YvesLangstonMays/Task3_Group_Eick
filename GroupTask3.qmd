@@ -48,7 +48,7 @@ The objective of this Task is to analyze and assess the hurricane risk of 25 cit
 
 # Methodology
 
-```{r echo=FALSE}
+```{r ImportingLibraries echo=FALSE }
 #| echo: false
 #libraries
 library(zoo)
@@ -58,7 +58,7 @@ library(dplyr)
 library(ggplot2)
 ```
 
-```{r echo=FALSE}
+```{r DataPrep echo=FALSE}
 #data collection and prep
 hurdat2 = read.csv("hurdat2-1851-2023-051124.txt", header=F, as.is=T)
 
@@ -101,7 +101,7 @@ gulf_storms = subset(panel,
 
 ```
 
-```{r}
+```{r DataPrep2}
 gulf_cities <- data.frame(
   City = c("New Orleans", "Houston", "Tampa", "Miami", "Corpus Christi", 
            "Pensacola", "Mobile", "Galveston", "Biloxi", "Key West",
@@ -145,7 +145,7 @@ cat("\nDate range:", min(gulf_storms$DATE), "to", max(gulf_storms$DATE))
 
 ```
 
-```{r}
+```{r LeafletMap}
 # I will attempt to use leaflet correctly to create an interactive map
 # Rendering this map is computationally expensive....
 
@@ -186,7 +186,7 @@ leaflet(recent_gulf_storms) %>%
 
 ```
 
-```{r}
+```{r StatisticalAnalysis}
 
 yearly_storms <- recent_gulf_storms %>%
   group_by(YEAR) %>%
@@ -209,7 +209,7 @@ View(status_count)
 
 ```
 
-```{r}
+```{r Plots}
 ggplot(yearly_storms, aes(x = YEAR, y = storm_count)) +
   geom_line(color = "blue") +
   geom_point() +
