@@ -1,115 +1,119 @@
+\documentclass[12pt,letterpaper]{article}
 
-\documentclass{report}
-% Encoding and Packages
+% Essential packages
 \usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
 \usepackage{graphicx}
-\usepackage[margin=1in,top=0.5in]{geometry}
 \usepackage[x11names,table]{xcolor}
-\usepackage{fancyhdr}
-\usepackage{tcolorbox}
-\usepackage{longtable}
-\usepackage{booktabs}
 \usepackage{setspace}
-\usepackage{pdflscape}
-\usepackage{caption}
 \usepackage{float}
-\usepackage{etex}
-\usepackage{luatex85}
-\usepackage{etoc}
-\usepackage{expl3}
-% Bibliography package
-\usepackage[backend=biber,style=authoryear]{biblatex}
+\usepackage{caption}
+\usepackage{authblk}
+\usepackage[backend=biber,
+            style=numeric,
+            sorting=none,
+            giveninits=true,
+            maxbibnames=10,
+            minbibnames=3,
+            maxcitenames=2,
+            mincitenames=1]{biblatex}
+\usepackage{doi}
+\usepackage{url}
+
+% Bibliography settings
 \addbibresource{references.bib}
-% Header height
-\setlength{\headheight}{3cm}
-% Section numbering
+
+% Configure biblatex to match ASM style
+\DeclareNameAlias{sortname}{family-given}
+\DeclareFieldFormat{pages}{#1}
+\DeclareFieldFormat[article]{volume}{\textbf{#1}}
+\DeclareFieldFormat{doi}{\url{https://doi.org/#1}}
+
+% ASM specific settings
+\doublespacing
+\setlength{\parindent}{0.5in}
+
+% Title and author formatting
+\renewcommand{\Affilfont}{\small\itshape}
+\renewcommand{\Authfont}{\large}
+
+% Section formatting
 \renewcommand{\thesection}{\arabic{section}.0}
-% Fancy Header and Footer Setup
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+
+% Caption formatting
+\captionsetup{font=small,labelfont=bf}
+
+% Header formatting
+\usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[C]{\includegraphics[width=0.8\textwidth]{UHLogo_Long.png}}
-\fancyfoot[C]{\thepage}
-\fancyfoot[L]{}
-\fancyfoot[R]{\today}
-% Table of Contents depth
-\setcounter{secnumdepth}{3}
-\setcounter{tocdepth}{3}
-% Etoc settings
-\etocsetlevel{section}{0}
-\etocsetnexttocdepth{3}
-% Increase TeX's main memory size
-\directlua{
-  pdf.setminorversion(7)
-  pdf.setobjcompresslevel(0)
-  pdf.setcompresslevel(0)
-}
-% Increase LaTeX counters
-\maxdeadcycles=1000
-\extrafloats{1000}
-% Increase TeX parameters
-\ExplSyntaxOn
-\dim_new:N \g_fpi_maxheight_dim
-\dim_gset:Nn \g_fpi_maxheight_dim {16383pt}
-\ExplSyntaxOff
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[R]{\thepage}
+
 % Define tightlist command
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
 % Hyperref settings (should be last)
 \usepackage{hyperref}
 \hypersetup{
-    colorlinks=false,
+    colorlinks=true,
     linkcolor=black,
     filecolor=black,
     urlcolor=black,
+    citecolor=black,
     pdfborder={0 0 0},
 }
 
 \begin{document}
+
+% Title page
 \begin{titlepage}
-    \centering
-    \vspace*{5cm}
-    {\Huge \textbf{Group Task 3\\[0.5em] 2024-2025}} \\[1.5em]
-    \begin{tabular}{c}
-        {\Large } \\
-    {\large } \\
-     \\[1em]
-        \end{tabular}
-    \vfill
-    \includegraphics[width=0.5\textwidth]{UHLogo_Long.png}
-    \vspace{0.8cm}
+\vspace*{2cm}
+
+\title{Group Task 3: Hurricane Risk Assessment for Gulf of Mexico Cities}
+\author[1]{Yves-Langston Mays\thanks{ymmays@cougarnet.uh.edu}}
+\author[1]{Uyen Vi Phan\thanks{uphan2@uh.edu}}
+\author[1]{Ny Dang\thanks{tndang8@cougarnet.uh.edu}}
+\affil[1]{Department of Natural Sciences \& Mathematics, University of Houston, Houston, Texas, USA}
+\date{\today}
+
+\maketitle
+
+\vspace{2cm}
+{\small\textbf{Running Head:} Hurricane Risk Assessment}
+
+\vspace{1cm}
+{\small\textbf{Keywords:} Non-Parametric Density Estimation, Spatial Correlation Analysis, Hurricane Risk Assessment}
+
 \end{titlepage}
 
-\newpage
-
-\section{Introduction}\label{introduction}
-
-Example citation \autocite{asgari2022}.
-
-\newpage
-
-\section{Background}\label{background}
-
-More discussion of house fly immune systems \autocite{asgari2022}.
+% Abstract
+\begin{abstract}
+Task 3 centers on hurricane risk for 25 cities in the Gulf of Mexico, using data from the Atlantic hurricane database (HURDAT2) from 1851 to 2023, provided by the National Hurricane Center. To analyze and assess this risk, we will perform 3 analyses in R to assess the hurricane risk on the Gulf of Mexico. First, we visualize and note our findings on the storm tracks over the last 25 years (1999-2024), focusing on storm paths, intensity, and duration at each location. Spatial correlation analysis will be used to explore the relationship between hurricane occurrences and contributing environmental factors, while Non-Parametric Density Estimation will estimate location-specific risk based on historical hurricane trajectories. These analyses collectively aim to identify the cities at highest risk of hurricane impact and gauge potential severity.
+\end{abstract}
 
 \newpage
 
-\section{Methodology}\label{methodology}
+\section{Introduction}
+[Your introduction text here]
 
-We can put examples of code here if we want to include it, if not we can
-use include=FALSE
+\section{Background}
+[Your background text here]
 
-\newpage
+\section{Methodology}
+[Your methodology text here]
 
-\section{Results}\label{results}
+\section{Results}
+[Your results text here]
 
-\newpage
+\section{Discussion}
+[Your discussion text here]
 
-\section{Conclusion}\label{conclusion}
+\section{Conclusion}
+[Your conclusion text here]
 
-\newpage
+\printbibliography[heading=bibintoc,title={References}]
 
-\section*{References}\label{references}
-\addcontentsline{toc}{section}{References}
-
-\printbibliography[heading=none]
 \end{document}
