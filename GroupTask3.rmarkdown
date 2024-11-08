@@ -36,6 +36,8 @@ format:
 bibliography: references.bib
 ---
 
+
+
 \newpage
 
 # Introduction
@@ -49,6 +51,8 @@ The objective of this Task is to analyze and assess the hurricane risk of 25 cit
 \newpage
 
 # Methodology
+
+
 
 ```{r}
 #| echo: false
@@ -253,6 +257,8 @@ ggplot(intensity_trend, aes(x = YEAR, y = avg_windspeed)) +
 
 ```
 
+
+
 \newpage
 
 # Findings
@@ -267,3 +273,4 @@ ggplot(intensity_trend, aes(x = YEAR, y = avg_windspeed)) +
 
 ::: {#refs}
 :::
+
