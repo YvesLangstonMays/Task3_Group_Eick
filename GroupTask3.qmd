@@ -35,6 +35,7 @@ format:
     cite-method: biblatex
 bibliography: references.bib
 ---
+
 # Introduction
 
 The objective of this Task is to analyze and assess the hurricane risk of 25 cities in the Gulf of Mexico.
@@ -47,7 +48,7 @@ The objective of this Task is to analyze and assess the hurricane risk of 25 cit
 
 # Methodology
 
-```{r}
+```{r echo=FALSE}
 #| echo: false
 #libraries
 library(zoo)
@@ -57,8 +58,7 @@ library(dplyr)
 library(ggplot2)
 ```
 
-```{r}
-#| echo: false
+```{r echo=FALSE}
 #data collection and prep
 hurdat2 = read.csv("hurdat2-1851-2023-051124.txt", header=F, as.is=T)
 
@@ -102,7 +102,6 @@ gulf_storms = subset(panel,
 ```
 
 ```{r}
-#| results: asis
 gulf_cities <- data.frame(
   City = c("New Orleans", "Houston", "Tampa", "Miami", "Corpus Christi", 
            "Pensacola", "Mobile", "Galveston", "Biloxi", "Key West",
