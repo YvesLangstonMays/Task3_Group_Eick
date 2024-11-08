@@ -38,7 +38,17 @@ bibliography: references.bib
 
 # Introduction
 
-The objective of this Task is to analyze and assess the hurricane risk of 25 cities in the Gulf of Mexico.
+One of the most common natural disaster plaguing the Gulf of Mexico are Hurricanes. Just this year (2024) there has been 9 hurricanes in the Atlantic Ocean including Beryl, Helen and Milton. These storms can have lasting impacts to people's lives, the environment, infrastructure and to the economy. Since 1980, hurricane damage has costed over \$1.3 trillion in damages with an average of \$22.8 billion dollars per event and 6,890 deaths\[1\]. Learning to predict where, when, and the intensity of hurricanes can not only save us billions of dollars but thousands of lives as well. This is especially important for cities that are at high risk such as cities like New Orleans that exists at extremely low elevations.
+
+This task aims to use historical data on hurricanes to predict future hurricane activity and highlight cities that are at most risk. The historical hurricane data from the National Hurricane Center’s HURDAT2 database, contains hurricane data in the Atlantic from 1851 to 2023. HURDAT2 records the six-hourly information on the location, maximum winds, central pressure, and (beginning in 2004) size of all known tropical cyclones and subtropical cyclones\[2\]. Along with a list of 25 cities and their locations in the Gulf of Mexico, 3 analyses will be performed oh HURDAT2 to analyze and predict the storm tracks in the Gulf of Mexico.
+
+The last 25 (1999-2024) years worth of storm tracks will be first visualized and analyzed on the over the Gulf of Mexico to identify common patterns and trends of the storm tracks. The visualization and the manual analysis provides a good general overview of how these storms move, where they are the most intense, and what places receive the most storms.
+
+The second analysis examines how certain factors like sea surface temperatures and El Nino/La Nina patterns affect hurricane activity. Spatial correlation analysis between these factors and hurricane activity will be used to achieve this. The correlation analysis will show how certain weather phenomena can affect hurricane activity to better predict hurricane activity.
+
+The last analysis uses non-parametric density estimation to assess the hurricane risk based on past trajectories and severity. This can provide insight on where hurricanes are more likely to appear and what routes they take. It can assess what regions will receive the most intense storms. Paired with the spatial correlation analysis, the information provided from the non-parametric density estimation can highlight what cities are most at risk in the Gulf of Mexico.
+
+These 3 analyses can provide valuable insight to the behavior and activity of future hurricanes. Knowing the behavior and patterns of the hurricanes, knowing what cities and regions are at the most risk from hurricane activity and how different factors play a role in hurricane activity can help people better prepare for hurricanes and minimize the losses caused by these storms. Meteorologists can use these predictions to better inform people about the route, severity of storms and what to expect as it passes. Governments can use this information to predict what cities will require the most aid. Insurance companies can use this data to decide what services are best suited to a specific location.
 
 \newpage
 
