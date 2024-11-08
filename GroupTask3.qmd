@@ -253,6 +253,143 @@ ggplot(intensity_trend, aes(x = YEAR, y = avg_windspeed)) +
 
 ```
 
+```{r}
+library(ncdf4)
+library(dplyr)
+library(tidyr)
+library(sp)
+library(corrplot)
+library(purrr)
+
+# Sea Surface Temperature (SST) data
+sst_file <- nc_open("sst.mnmean.nc")
+sst_data <- ncvar_get(sst_file, "sst")
+lat_sst <- ncvar_get(sst_file, "lat")
+lon_sst <- ncvar_get(sst_file, "lon")
+nc_close(sst_file)
+sst_mean <- apply(sst_data, 1, mean, na.rm = TRUE) 
+sst_df <- data.frame(Year = 1950 + seq_along(sst_mean) - 1, SST = sst_mean)
+
+# El Niño/La Niña (ONI) data
+oni_data <- read.table("oni.ascii.txt", header = TRUE)
+names(oni_data)[names(oni_data) == "YR"] <- "Year"
+
+# Atlantic Multidecadal Oscillation (AMO) data
+lines <- readLines("amon.sm.data")
+numeric_lines <- lines[3:(length(lines) - 5)]
+data_string <- paste(numeric_lines, collapse = "\n")
+temp_file <- tempfile(fileext = ".txt")
+writeLines(data_string, temp_file)
+amo_data <- read.table(temp_file, header = TRUE, na.strings = "-99.990")
+names(amo_data)[1] <- "Year"
+month_names <- c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+current_col_names <- names(amo_data)
+if (sum(current_col_names == "Year") > 1) {
+    names(amo_data)[which(current_col_names == "Year")[2]] <- "Year_Duplicate"
+}
+
+if (length(month_names) + 1 == ncol(amo_data)) {
+    names(amo_data)[2:ncol(amo_data)] <- month_names
+} else {
+    warning("Number of month names does not match the number of columns in amo_data.")
+}
+
+amo_long <- pivot_longer(amo_data, cols = -Year, names_to = "Month", values_to = "AMO_Value")
+
+# Saharan Dust Levels (AOT) data
+aot_file <- nc_open("AOT_AVHRR_v04r00-preliminary_monthly-avg_202001_c20220505.nc")
+aot_data <- ncvar_get(aot_file, "aot1")
+nc_close(aot_file)
+aot_mean <- rowMeans(aot_data, na.rm = TRUE)
+aot_df <- data.frame(Year = seq(2020, 2022, by = 1), AOT = aot_mean)
+
+# Upper-Level Wind Patterns (UWND) data
+uwnd_file <- nc_open("uwnd.mon.mean.nc")
+uwnd_data <- ncvar_get(uwnd_file, "uwnd")
+lat_uwnd <- ncvar_get(uwnd_file, "lat")
+lon_uwnd <- ncvar_get(uwnd_file, "lon")
+nc_close(uwnd_file)
+uwnd_mean <- apply(uwnd_data, 1, mean, na.rm = TRUE)
+uwnd_df <- data.frame(Year = 1950 + seq_along(uwnd_mean) - 1, Uwind = uwnd_mean)
+
+
+oni_agg <- oni_data %>%
+  group_by(Year) %>%
+  summarize(TOTAL = mean(TOTAL, na.rm = TRUE),
+            ANOM = mean(ANOM, na.rm = TRUE))
+amo_long <- amo_long %>%
+  group_by(Year) %>%
+  summarize(AMO_Value = mean(AMO_Value, na.rm = TRUE))
+aot_df <- aot_df %>%
+  group_by(Year) %>%
+  summarize(AOT = mean(AOT, na.rm = TRUE))
+
+# Merge all datasets into a single data frame
+combined_data <- reduce(list(sst_df, oni_agg, amo_long, aot_df, uwnd_df), 
+                         function(x, y) merge(x, y, by = "Year", all = TRUE))
+str(combined_data)
+combined_data_filtered <- combined_data %>%
+  filter(!is.na(AOT))
+str(combined_data_filtered)
+
+# Merge data frame with hurrican activity
+hurricane_activity <- gulf_storms %>%
+    mutate(YEAR = as.numeric(substring(DATE, 1, 4))) %>%
+    group_by(YEAR) %>%
+    summarise(storm_count = n())
+names(hurricane_activity)[names(hurricane_activity) == "YEAR"] <- "Year"
+analysis_data <- combined_data %>%
+    left_join(hurricane_activity, by = "Year")
+str(analysis_data)
+
+# Correlation Matrix
+correlation_matrix <- cor(analysis_data[, c("storm_count", "SST", "TOTAL", "ANOM", "AMO_Value", "AOT", "Uwind")], use = "pairwise.complete.obs")
+print(correlation_matrix)
+if (!is.null(correlation_matrix) && ncol(correlation_matrix) > 0) {
+    library(corrplot)
+    corrplot(correlation_matrix, method = "circle")
+} else {
+    message("The correlation matrix is empty or null.")
+}
+
+# Scatterplots with Linear Regression Models
+filtered_data <- analysis_data
+
+variables_to_analyze <- c("SST", "TOTAL", "ANOM", "AMO_Value", "AOT", "Uwind")
+
+cat("Initial number of rows in filtered_data:", nrow(filtered_data), "\n")
+
+for (var in variables_to_analyze) {
+    
+    current_filtered_data <- filtered_data %>%
+        filter(!is.na(.data[[var]]) & !is.infinite(.data[[var]])) %>%
+        filter(!is.na(storm_count) & !is.infinite(storm_count))
+
+    cat("Rows available for", var, ":", nrow(current_filtered_data), "\n")
+
+    if (nrow(current_filtered_data) > 0) {
+        # Create scatter plot
+        p <- ggplot(current_filtered_data, aes_string(x = var, y = "storm_count")) +
+            geom_point() +
+            geom_smooth(method = "lm", se = FALSE, color = "blue") +
+            labs(title = paste("Storm Count vs", var), 
+                 x = var, 
+                 y = "Storm Count") +
+            theme_minimal()
+
+        print(p)
+
+        model <- lm(as.formula(paste("storm_count ~", var)), data = current_filtered_data)
+
+        cat("Linear Model for:", var, "\n")
+        print(summary(model))
+        cat("\n") 
+    } else {
+        cat("Not enough data to plot", var, "vs Storm Count.\n")
+    }
+}
+```
+
 \newpage
 
 # Findings
