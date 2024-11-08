@@ -270,5 +270,12 @@ ggplot(intensity_trend, aes(x = YEAR, y = avg_windspeed)) +
 
 # References {.unnumbered}
 
-::: {#refs}
-:::
+:::: {#refs}
+<div>
+
+\[1\] National Oceanic and Atmospheric Administration. 2023. Hurricane Costs. NOAA, Office for Coastal Management. Retrieved October 16, 2024, from <https://coast.noaa.gov/states/fast-facts/hurricane-costs.html>\[1\] National Oceanic and Atmospheric Administration. 2023. Hurricane Costs. NOAA, Office for Coastal Management. Retrieved October 16, 2024, from <https://coast.noaa.gov/states/fast-facts/hurricane-costs.html>
+
+\[2\] National Hurricane Center. 2023. Data Archive. NOAA, National Oceanic and Atmospheric Administration. Retrieved October 16, 2024, from <https://www.nhc.noaa.gov/data/>
+
+</div>
+::::
