@@ -1,5 +1,5 @@
 ---
-title: "Group Task 3"
+title: "Group Task 3: Hurricane Risk Assessment for Gulf of Mexico Cities"
 author:
   - name: Yves-Langston Mays
     email: ymmays@cougarnet.uh.edu
@@ -23,7 +23,7 @@ author:
         city: Houston
         country: USA
 abstract: |
-  Task 3 centers on hurricane risk for 25 cities in the Gulf of Mexico, using data from the Atlantic hurricane database (HURDAT2) from 1851 to 2023, provided by the National Hurricane Center. To analyze and assess this risk, we will perform 3 analyses in R to assess the hurricane risk on the Gulf of Mexico. First, we visualize and note our findings on the storm tracks over the last 25 years (1999-2024), focusing on storm paths, intensity, and duration at each location. Spatial correlation analysis will be used to explore the relationship between hurricane occurrences and contributing environmental factors, while Non-Parametric Density Estimation will estimate location-specific risk based on historical hurricane trajectories. These analyses collectively aim to identify the cities at highest risk of hurricane impact and gauge potential severity. [INSERT FINDINGS OF STUDY]
+  Task 3 centers on hurricane risk for 25 cities in the Gulf of Mexico, using data from the Atlantic hurricane database (HURDAT2) from 1851 to 2023, provided by the National Hurricane Center. To analyze and assess this risk, we will perform 3 analyses in R to assess the hurricane risk on the Gulf of Mexico. First, we visualize and note our findings on the storm tracks over the last 25 years (1999-2024), focusing on storm paths, intensity, and duration at each location. Spatial correlation analysis will be used to explore the relationship between hurricane occurrences and contributing environmental factors, while Non-Parametric Density Estimation will estimate location-specific risk based on historical hurricane trajectories. These analyses collectively aim to identify the cities at highest risk of hurricane impact and gauge potential severity.
 keywords: [Non-Parametric Density Estimation, Spatial Correlation Analysis, Hurricane Risk Assessment]
 format:
   pdf:
@@ -36,18 +36,26 @@ format:
 bibliography: references.bib
 ---
 
-# Introduction
+# 1.0 Introduction
 
-The objective of this Task is to analyze and assess the hurricane risk of 25 cities in the Gulf of Mexico.
+One of the most common natural disaster plaguing the Gulf of Mexico are Hurricanes. Just this year (2024) there has been 9 hurricanes in the Atlantic Ocean including Beryl, Helen and Milton. These storms can have lasting impacts to people's lives, the environment, infrastructure and to the economy. Since 1980, hurricane damage has costed over \$1.3 trillion in damages with an average of \$22.8 billion dollars per event and 6,890 deaths\[1\]. Learning to predict where, when, and the intensity of hurricanes can not only save us billions of dollars but thousands of lives as well. This is especially important for cities that are at high risk such as cities like New Orleans that exists at extremely low elevations.
 
-\newpage
+This task aims to use historical data on hurricanes to predict future hurricane activity and highlight cities that are at most risk. The historical hurricane data from the National Hurricane Center’s HURDAT2 database, contains hurricane data in the Atlantic from 1851 to 2023. HURDAT2 records the six-hourly information on the location, maximum winds, central pressure, and (beginning in 2004) size of all known tropical cyclones and subtropical cyclones\[2\]. Along with a list of 25 cities and their locations in the Gulf of Mexico, 3 analyses will be performed oh HURDAT2 to analyze and predict the storm tracks in the Gulf of Mexico.
 
-# Background
+The last 25 (1999-2024) years worth of storm tracks will be first visualized and analyzed on the over the Gulf of Mexico to identify common patterns and trends of the storm tracks. The visualization and the manual analysis provides a good general overview of how these storms move, where they are the most intense, and what places receive the most storms.
 
-\newpage
+The second analysis examines how certain factors like sea surface temperatures and El Nino/La Nina patterns affect hurricane activity. Spatial correlation analysis between these factors and hurricane activity will be used to achieve this. The correlation analysis will show how certain weather phenomena can affect hurricane activity to better predict hurricane activity.
 
-# Methodology
+The last analysis uses non-parametric density estimation to assess the hurricane risk based on past trajectories and severity. This can provide insight on where hurricanes are more likely to appear and what routes they take. It can assess what regions will receive the most intense storms. Paired with the spatial correlation analysis, the information provided from the non-parametric density estimation can highlight what cities are most at risk in the Gulf of Mexico.
 
+These 3 analyses can provide valuable insight to the behavior and activity of future hurricanes. Knowing the behavior and patterns of the hurricanes, knowing what cities and regions are at the most risk from hurricane activity and how different factors play a role in hurricane activity can help people better prepare for hurricanes and minimize the losses caused by these storms. Meteorologists can use these predictions to better inform people about the route, severity of storms and what to expect as it passes. Governments can use this information to predict what cities will require the most aid. Insurance companies can use this data to decide what services are best suited to a specific location
+
+# 2.0 Background
+
+Background stuff here
+
+# 3.0 Methodology
+## 3.1 Data Collection and Preparation
 ```{r ImportingLibraries}
 #libraries
 library(zoo)
@@ -99,7 +107,7 @@ gulf_storms = subset(panel,
                     LONGITUDE >= -98 & LONGITUDE <= -80)
 
 ```
-
+## 3.2 Geographic Data Setup
 ```{r DataPrep2}
 gulf_cities <- data.frame(
   City = c("New Orleans", "Houston", "Tampa", "Miami", "Corpus Christi", 
@@ -143,7 +151,7 @@ cat("\nUnique storms:", length(unique(gulf_storms$HID)))
 cat("\nDate range:", min(gulf_storms$DATE), "to", max(gulf_storms$DATE))
 
 ```
-
+## 3.3 Visualization
 ```{r LeafletMap}
 # I will attempt to use leaflet correctly to create an interactive map
 # Rendering this map is computationally expensive....
@@ -184,7 +192,7 @@ leaflet(recent_gulf_storms) %>%
 
 
 ```
-
+## 3.4 Statistical Analysis
 ```{r StatisticalAnalysis}
 
 yearly_storms <- recent_gulf_storms %>%
@@ -249,16 +257,23 @@ ggplot(intensity_trend, aes(x = YEAR, y = avg_windspeed)) +
 ```
 
 \newpage
+# 4.0 Results
 
-# Findings
-
-\newpage
-
-# Conclusion
+Here you can discuss the findings from your statistical analysis and visualizations.
 
 \newpage
+# 5.0 Discussion
 
+Discuss the implications of your findings and their significance for hurricane risk assessment.
+
+\newpage
+# 6.0 Conclusion
+
+Summarize your key findings and their implications for hurricane risk assessment in the Gulf of Mexico region.
+\newpage
 # References {.unnumbered}
 
 ::: {#refs}
-:::
+\[1\] National Oceanic and Atmospheric Administration. 2023. Hurricane Costs. NOAA, Office for Coastal Management. Retrieved October 16, 2024, from <https://coast.noaa.gov/states/fast-facts/hurricane-costs.html>\[1\] National Oceanic and Atmospheric Administration. 2023. Hurricane Costs. NOAA, Office for Coastal Management. Retrieved October 16, 2024, from <https://coast.noaa.gov/states/fast-facts/hurricane-costs.html>
+
+\[2\] National Hurricane Center. 2023. Data Archive. NOAA, National Oceanic and Atmospheric Administration. Retrieved October 16, 2024, from <https://www.nhc.noaa.gov/data/>
