@@ -30,6 +30,9 @@ format:
     template: GroupTask3.tex
     pdf-engine: lualatex
     keep-tex: true
+    highlight-style: none
+    template-partials:
+      - before-body.tex
     toc: true
     number-sections: true
     cite-method: biblatex
@@ -38,8 +41,7 @@ bibliography: references.bib
 
 # 1.0 Introduction
 
-One of the most common natural disaster plaguing the Gulf of Mexico are Hurricanes. Just this year (2024) there has been 9 hurricanes in the Atlantic Ocean including Beryl, Helen and Milton. These storms can have lasting impacts to people's lives, the environment, infrastructure and to the economy. Since 1980, hurricane damage has costed over \$1.3 trillion in damages with an average of \$22.8 billion dollars per event and 6,890 deaths\[1\]. Learning to predict where, when, and the intensity of hurricanes can not only save us billions of dollars but thousands of lives as well. This is especially important for cities that are at high risk such as cities like New Orleans that exists at extremely low elevations.
-
+One of the most common natural disaster plaguing the Gulf of Mexico are Hurricanes. Just this year (2024) there has been 9 hurricanes in the Atlantic Ocean including Beryl, Helen and Milton. These storms can have lasting impacts to people's lives, the environment, infrastructure and to the economy. Since 1980, hurricane damage has costed over \$1.3 trillion in damages with an average of \$22.8 billion dollars per event and 6,890 deaths \[1\]. Learning to predict where, when, and the intensity of hurricanes can not only save us billions of dollars but thousands of lives as well. This is especially important for cities that are at high risk such as cities like New Orleans that exists at extremely low elevations.
 
 This task aims to use historical data on hurricanes to predict future hurricane activity and highlight cities that are at most risk. The historical hurricane data from the National Hurricane Center’s HURDAT2 database, contains hurricane data in the Atlantic from 1851 to 2023. HURDAT2 records the six-hourly information on the location, maximum winds, central pressure, and (beginning in 2004) size of all known tropical cyclones and subtropical cyclones\[2\]. Along with a list of 25 cities and their locations in the Gulf of Mexico, 3 analyses will be performed oh HURDAT2 to analyze and predict the storm tracks in the Gulf of Mexico.
 
@@ -51,8 +53,7 @@ The last analysis uses non-parametric density estimation to assess the hurricane
 
 These 3 analyses can provide valuable insight to the behavior and activity of future hurricanes. Knowing the behavior and patterns of the hurricanes, knowing what cities and regions are at the most risk from hurricane activity and how different factors play a role in hurricane activity can help people better prepare for hurricanes and minimize the losses caused by these storms. Meteorologists can use these predictions to better inform people about the route, severity of storms and what to expect as it passes. Governments can use this information to predict what cities will require the most aid. Insurance companies can use this data to decide what services are best suited to a specific location.
 
-
-This task aims to use historical data on hurricanes to predict future hurricane activity and highlight cities that are at most risk. The historical hurricane data from the National Hurricane Center’s HURDAT2 database, contains hurricane data in the Atlantic from 1851 to 2023. HURDAT2 records the six-hourly information on the location, maximum winds, central pressure, and (beginning in 2004) size of all known tropical cyclones and subtropical cyclones\[2\]. Along with a list of 25 cities and their locations in the Gulf of Mexico, 3 analyses will be performed oh HURDAT2 to analyze and predict the storm tracks in the Gulf of Mexico.
+This task aims to use historical data on hurricanes to predict future hurricane activity and highlight cities that are at most risk. The historical hurricane data from the National Hurricane Center’s HURDAT2 database, contains hurricane data in the Atlantic from 1851 to 2023. HURDAT2 records the six-hourly information on the location, maximum winds, central pressure, and (beginning in 2004) size of all known tropical cyclones and subtropical cyclones \[2\]. Along with a list of 25 cities and their locations in the Gulf of Mexico, 3 analyses will be performed oh HURDAT2 to analyze and predict the storm tracks in the Gulf of Mexico.
 
 The last 25 (1999-2024) years worth of storm tracks will be first visualized and analyzed on the over the Gulf of Mexico to identify common patterns and trends of the storm tracks. The visualization and the manual analysis provides a good general overview of how these storms move, where they are the most intense, and what places receive the most storms.
 
@@ -67,8 +68,11 @@ These 3 analyses can provide valuable insight to the behavior and activity of fu
 Background stuff here
 
 # 3.0 Methodology
+
 ## 3.1 Data Collection and Preparation
+
 ```{r ImportingLibraries}
+#| include: false
 #libraries
 library(zoo)
 library(sf)
@@ -78,6 +82,7 @@ library(ggplot2)
 ```
 
 ```{r DataPrep}
+#| include: false
 #data collection and prep
 hurdat2 = read.csv("hurdat2-1851-2023-051124.txt", header=F, as.is=T)
 
@@ -119,8 +124,11 @@ gulf_storms = subset(panel,
                     LONGITUDE >= -98 & LONGITUDE <= -80)
 
 ```
+
 ## 3.2 Geographic Data Setup
+
 ```{r DataPrep2}
+#| echo: false
 gulf_cities <- data.frame(
   City = c("New Orleans", "Houston", "Tampa", "Miami", "Corpus Christi", 
            "Pensacola", "Mobile", "Galveston", "Biloxi", "Key West",
@@ -163,8 +171,11 @@ cat("\nUnique storms:", length(unique(gulf_storms$HID)))
 cat("\nDate range:", min(gulf_storms$DATE), "to", max(gulf_storms$DATE))
 
 ```
+
 ## 3.3 Visualization
+
 ```{r LeafletMap}
+#| echo: false
 # I will attempt to use leaflet correctly to create an interactive map
 # Rendering this map is computationally expensive....
 
@@ -204,9 +215,11 @@ leaflet(recent_gulf_storms) %>%
 
 
 ```
-## 3.4 Statistical Analysis
-```{r StatisticalAnalysis}
 
+## 3.4 Statistical Analysis
+
+```{r StatisticalAnalysis}
+#| echo: false
 yearly_storms <- recent_gulf_storms %>%
   group_by(YEAR) %>%
   summarize(storm_count = n())
@@ -269,25 +282,27 @@ ggplot(intensity_trend, aes(x = YEAR, y = avg_windspeed)) +
 ```
 
 \newpage
+
 # 4.0 Results
 
-Here you can discuss the findings from your statistical analysis and visualizations.
+Discuss results of analysis
 
 \newpage
+
 # 5.0 Discussion
 
-Discuss the implications of your findings and their significance for hurricane risk assessment.
+Discuss the implications and significance here
 
 \newpage
+
 # 6.0 Conclusion
 
-Summarize your key findings and their implications for hurricane risk assessment in the Gulf of Mexico region.
-\newpage
-# References {.unnumbered}
+Conclusion Here
 
+# References {.unnumbered}
 
 ::: {#refs}
 \[1\] National Oceanic and Atmospheric Administration. 2023. Hurricane Costs. NOAA, Office for Coastal Management. Retrieved October 16, 2024, from <https://coast.noaa.gov/states/fast-facts/hurricane-costs.html>\[1\] National Oceanic and Atmospheric Administration. 2023. Hurricane Costs. NOAA, Office for Coastal Management. Retrieved October 16, 2024, from <https://coast.noaa.gov/states/fast-facts/hurricane-costs.html>
 
 \[2\] National Hurricane Center. 2023. Data Archive. NOAA, National Oceanic and Atmospheric Administration. Retrieved October 16, 2024, from <https://www.nhc.noaa.gov/data/>
-
+:::
