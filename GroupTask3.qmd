@@ -48,8 +48,7 @@ The objective of this Task is to analyze and assess the hurricane risk of 25 cit
 
 # Methodology
 
-```{r ImportingLibraries echo=FALSE }
-#| echo: false
+```{r ImportingLibraries}
 #libraries
 library(zoo)
 library(sf)
@@ -58,7 +57,7 @@ library(dplyr)
 library(ggplot2)
 ```
 
-```{r DataPrep echo=FALSE}
+```{r DataPrep}
 #data collection and prep
 hurdat2 = read.csv("hurdat2-1851-2023-051124.txt", header=F, as.is=T)
 
