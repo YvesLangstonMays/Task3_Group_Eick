@@ -1,115 +1,91 @@
+\documentclass[12pt,letterpaper]{article}
 
-\documentclass{report}
-% Encoding and Packages
+% Essential packages
 \usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
 \usepackage{graphicx}
-\usepackage[margin=1in,top=0.5in]{geometry}
 \usepackage[x11names,table]{xcolor}
-\usepackage{fancyhdr}
-\usepackage{tcolorbox}
-\usepackage{longtable}
-\usepackage{booktabs}
 \usepackage{setspace}
-\usepackage{pdflscape}
-\usepackage{caption}
 \usepackage{float}
-\usepackage{etex}
-\usepackage{luatex85}
-\usepackage{etoc}
-\usepackage{expl3}
-% Bibliography package
-\usepackage[backend=biber,style=authoryear]{biblatex}
-\addbibresource{references.bib}
-% Header height
-\setlength{\headheight}{3cm}
+\usepackage{caption}
+\usepackage{authblk}
+\usepackage[backend=biber,style=numeric]{biblatex}
+\usepackage{doi}
+\usepackage{url}
+
+% Minimal code chunk support
+\usepackage{fancyvrb}
+\usepackage{framed}
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newenvironment{Highlighting}{}{}
+
+% Bibliography settings
+$if(bibliography)$
+\addbibresource{$bibliography$}
+$endif$
+
+% Document settings
+\doublespacing
+\setlength{\parindent}{0.5in}
+
+% Title formatting - ASM style
+\renewcommand{\Affilfont}{\normalfont\normalsize}
+\renewcommand{\Authfont}{\normalfont\normalsize}
+
 % Section numbering
 \renewcommand{\thesection}{\arabic{section}.0}
-% Fancy Header and Footer Setup
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+
+% Headers
+\usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[C]{\includegraphics[width=0.8\textwidth]{UHLogo_Long.png}}
-\fancyfoot[C]{\thepage}
-\fancyfoot[L]{}
-\fancyfoot[R]{\today}
-% Table of Contents depth
-\setcounter{secnumdepth}{3}
-\setcounter{tocdepth}{3}
-% Etoc settings
-\etocsetlevel{section}{0}
-\etocsetnexttocdepth{3}
-% Increase TeX's main memory size
-\directlua{
-  pdf.setminorversion(7)
-  pdf.setobjcompresslevel(0)
-  pdf.setcompresslevel(0)
-}
-% Increase LaTeX counters
-\maxdeadcycles=1000
-\extrafloats{1000}
-% Increase TeX parameters
-\ExplSyntaxOn
-\dim_new:N \g_fpi_maxheight_dim
-\dim_gset:Nn \g_fpi_maxheight_dim {16383pt}
-\ExplSyntaxOff
-% Define tightlist command
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[R]{\thepage}
+
+% Lists
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-% Hyperref settings (should be last)
+
+% Hyperlinks (last)
 \usepackage{hyperref}
 \hypersetup{
-    colorlinks=false,
+    colorlinks=true,
     linkcolor=black,
     filecolor=black,
     urlcolor=black,
-    pdfborder={0 0 0},
+    citecolor=black
 }
 
 \begin{document}
-\begin{titlepage}
-    \centering
-    \vspace*{5cm}
-    {\Huge \textbf{Group Task 3\\[0.5em] 2024-2025}} \\[1.5em]
-    \begin{tabular}{c}
-        {\Large } \\
-    {\large } \\
-     \\[1em]
-        \end{tabular}
-    \vfill
-    \includegraphics[width=0.5\textwidth]{UHLogo_Long.png}
-    \vspace{0.8cm}
-\end{titlepage}
 
+% Title
+$if(title)$
+\title{$title$}
+$endif$
+
+% Hardcoded authors section - ASM style
+\author{Yves-Langston Mays}\affil{Department of Natural Sciences \& Mathematics, University of Houston Main Campus, Houston, USA\\\texttt{ymmays@cougarnet.uh.edu}}
+\author{Uyen Vi Phan}\affil{Department of Natural Sciences \& Mathematics, University of Houston Main Campus, Houston, USA\\\texttt{uphan2@uh.edu}}
+\author{Ny Dang}\affil{Department of Natural Sciences \& Mathematics, University of Houston Main Campus, Houston, USA\\\texttt{tndang8@cougarnet.uh.edu}}
+
+\date{\today}
+\maketitle
+
+% Abstract
+$if(abstract)$
+\begin{abstract}
+$abstract$
+\end{abstract}
+$endif$
+
+% Table of Contents
+$if(toc)$
+\tableofcontents
 \newpage
+$endif$
 
-\section{Introduction}\label{introduction}
+$body$
 
-Example citation \autocite{asgari2022}.
-
-\newpage
-
-\section{Background}\label{background}
-
-More discussion of house fly immune systems \autocite{asgari2022}.
-
-\newpage
-
-\section{Methodology}\label{methodology}
-
-We can put examples of code here if we want to include it, if not we can
-use include=FALSE
-
-\newpage
-
-\section{Results}\label{results}
-
-\newpage
-
-\section{Conclusion}\label{conclusion}
-
-\newpage
-
-\section*{References}\label{references}
-\addcontentsline{toc}{section}{References}
-
-\printbibliography[heading=none]
 \end{document}
