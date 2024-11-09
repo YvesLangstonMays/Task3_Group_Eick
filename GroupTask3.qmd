@@ -446,4 +446,14 @@ Conclusion Here
 \[1\] National Oceanic and Atmospheric Administration. 2023. Hurricane Costs. NOAA, Office for Coastal Management. Retrieved October 16, 2024, from <https://coast.noaa.gov/states/fast-facts/hurricane-costs.html>\[1\] National Oceanic and Atmospheric Administration. 2023. Hurricane Costs. NOAA, Office for Coastal Management. Retrieved October 16, 2024, from <https://coast.noaa.gov/states/fast-facts/hurricane-costs.html>
 
 \[2\] National Hurricane Center. 2023. Data Archive. NOAA, National Oceanic and Atmospheric Administration. Retrieved October 16, 2024, from <https://www.nhc.noaa.gov/data/>
+
+\[3\] NOAA Physical Sciences Laboratory. 2023. NOAA Extended Reconstructed Sea Surface Temperature (ERSST) v4. Retrieved November 7, 2024, from <https://downloads.psl.noaa.gov/Datasets/noaa.ersst.v4/.> Original data source: B. Huang, et al., Extended Reconstructed Sea Surface Temperature version 4 (ERSST.v4): Part I. Upgrades and Intercomparisons, J. Clim., 28, 911-930, 2015.
+
+\[4\] NOAA Climate Prediction Center. 2023. Oceanic Niño Index (ONI). Retrieved November 7, 2024, from <https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt.>
+
+\[5\] NOAA Physical Sciences Laboratory. 2023. Atlantic Multidecadal Oscillation (AMO) - Smoothed, Short (1948 to Jan 2023). Retrieved November 7, 2024, from <https://psl.noaa.gov/data/timeseries/AMO/>
+
+\[6\] Copernicus Climate Change Service (C3S). 2023. Satellite Aerosol Properties Dataset. Retrieved November 7, 2024, from <https://cds.climate.copernicus.eu/datasets/satellite-aerosol-properties?tab=download.>
+
+\[7\] NOAA Physical Sciences Laboratory. 2023. NCEP/NCAR Reanalysis Project. Retrieved November 7, 2024, from <https://psl.noaa.gov/data/gridded/data.ncep.reanalysis.html.> Original data source: R. Kalnay et al., The NCEP/NCAR 40-year reanalysis project, Bull. Amer. Meteor. Soc., 77, 437–470, 1996.
 :::
