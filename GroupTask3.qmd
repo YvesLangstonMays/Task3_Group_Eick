@@ -77,6 +77,7 @@ The integration of these methods below will support and inform decision-making p
 #  Methodology
 
 ## 3.1 Data Collection and Preparation
+Data preparation consists of converting HURDAT2 into a workable data for analysis. To achieve this, the storm name and ID are given its own columns. For the gulf cities data, 2 additional columns were made for its longitude and latitude.
 
 ```{r ImportingLibraries}
 #| include: false
