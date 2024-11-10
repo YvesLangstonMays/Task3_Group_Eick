@@ -253,7 +253,7 @@ View(status_count)
 ggplot(yearly_storms, aes(x = YEAR, y = storm_count)) +
   geom_line(color = "blue") +
   geom_point() +
-  labs(title = "year storm count from 99-23",
+  labs(title = "year storm count from 1999-2023",
        x = "Year",
        y = "# of Storms")
 
@@ -289,7 +289,6 @@ ggplot(intensity_trend, aes(x = YEAR, y = avg_windspeed)) +
 
 ```
 
-<<<<<<< HEAD
 ```{r}
 #| echo: false
 library(ncdf4)
@@ -418,6 +417,7 @@ for (var in variables_to_analyze) {
     }
 }
 ```
+The first chart shows the amount of storms that occur during each year from 1999 to 2023. There is no clear pattern for this, as the amount of storms per year is very variable. Storm count can be as low as 5 storms in a year to over 50 storms in a year.The second graph shows the frequency of storms by month. Storms tend to peak during the summer months, mainly August, September and October and is usually the lowest during winter to early spring, mainly December, January, February and March. This makes sense on a scientific standpoint as hurricanes are fueled by warm ocean water and summer is usually when the water is the warmest in the year. The third chart shows the frequency of storms based on their type:Tropical Wave, Tropical Depression, Tropical Storm, Hurricane, Extratropical Cyclone, Subtropical Depression, Subtropical Storm, Low Pressure System, and Non-Tropical Disturbance. Tropical storms being the most common followed by hurricanes and tropical depressions. Subtropical Depression is the least common.This could show that more intense storms are more common in the Gulf of Mexico, which can mean higher overall risk for cities that get frequent storms. The last chart shows the average wind speed per year. Most years, the average windspeed ranges between 40kt-60kt. With 2005 followed by 2004 to be the highest years with approximately 68kt and 66kt. The lowest year is 2015 with the average wind speed being 29kt. The average windspeeds after 2016 seems to increased overall as well.
 
 ## Non-parametric density estimation
 
