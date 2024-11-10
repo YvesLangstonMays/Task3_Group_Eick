@@ -22,7 +22,6 @@ author:
         department: Natural Sciences & Mathematics
         city: Houston
         country: USA
-<<<<<<< HEAD
   - name: Connie Yang
     email: cyang39@cougarnet.uh.edu
     affiliation:
@@ -30,10 +29,9 @@ author:
         department: Natural Sciences & Mathematics
         city: Houston
         country: USA
-=======
->>>>>>> c2b1439e3f0796ec95e5ff2027367daf3bb47a46
-abstract: |
-  Task 3 centers on hurricane risk for 25 cities in the Gulf of Mexico, using data from the Atlantic hurricane database (HURDAT2) from 1851 to 2023, provided by the National Hurricane Center. To analyze and assess this risk, we will perform 3 analyses in R to assess the hurricane risk on the Gulf of Mexico. First, we visualize and note our findings on the storm tracks over the last 25 years (1999-2024), focusing on storm paths, intensity, and duration at each location. Spatial correlation analysis will be used to explore the relationship between hurricane occurrences and contributing environmental factors, while Non-Parametric Density Estimation will estimate location-specific risk based on historical hurricane trajectories. These analyses collectively aim to identify the cities at highest risk of hurricane impact and gauge potential severity.
+---
+abstract:
+  "Task 3 centers on hurricane risk for 25 cities in the Gulf of Mexico, using data from the Atlantic hurricane database (HURDAT2) from 1851 to 2023, provided by the National Hurricane Center. To analyze and assess this risk, we will perform 3 analyses in R to assess the hurricane risk on the Gulf of Mexico. First, we visualize and note our findings on the storm tracks over the last 25 years (1999-2024), focusing on storm paths, intensity, and duration at each location. Spatial correlation analysis will be used to explore the relationship between hurricane occurrences and contributing environmental factors, while Non-Parametric Density Estimation will estimate location-specific risk based on historical hurricane trajectories. These analyses collectively aim to identify the cities at highest risk of hurricane impact and gauge potential severity."
 keywords: [Non-Parametric Density Estimation, Spatial Correlation Analysis, Hurricane Risk Assessment]
 format:
   pdf:
@@ -420,8 +418,95 @@ for (var in variables_to_analyze) {
 }
 ```
 
+## Non-parametric density estimation
+
+Method 1: Kernel Density Estimation
+```{r}
+library(MASS)
+library(fields)
+
+kde <- kde2d(
+  gulf_storms$LONGITUDE, 
+  gulf_storms$LATITUDE,
+  n = 100,
+  lims = c(range(gulf_storms$LONGITUDE), range(gulf_storms$LATITUDE))
+)
+
+# risk scores for cities
+city_risks <- interp.surface(
+  list(x = kde$x, y = kde$y, z = kde$z),
+  cbind(gulf_cities$Longitude, gulf_cities$Latitude)
+)
+
+# results dataframe
+kde_results <- data.frame(
+  City = gulf_cities$City,
+  Risk_Score = city_risks
+)
+
+# normalize scores
+kde_results$Risk_Score <- scale(kde_results$Risk_Score)
+
+# sort by risk
+kde_results <- kde_results[order(-kde_results$Risk_Score),]
+
+# results
+ggplot(kde_results, aes(x = reorder(City, Risk_Score), y = Risk_Score)) +
+  geom_col(fill = "steelblue") +
+  coord_flip() +
+  theme_minimal() +
+  labs(title = "Hurricane Risk by City (KDE Method)",
+       x = "City",
+       y = "Risk Score")
+
+print(kde_results)
+
+```
+
+
+Method 2: K-Nearest Neighbors
+```{r}
+library(geosphere)
+
+k <- 30  # number of nearest storms to consider
+risks <- sapply(1:nrow(gulf_cities), function(i) {
+  # distances to all storms
+  dists <- distHaversine(
+    cbind(gulf_cities$Longitude[i], gulf_cities$Latitude[i]),
+    cbind(gulf_storms$LONGITUDE, gulf_storms$LATITUDE)
+  )
+  
+  # k nearest storms
+  nearest <- order(dists)[1:k]
+  mean(gulf_storms$WINDSPEED_KT[nearest])  # use average windspeed as risk measure
+})
+
+# results dataframe
+knn_results <- data.frame(
+  City = gulf_cities$City,
+  Risk_Score = risks
+)
+
+# normalize scores
+knn_results$Risk_Score <- scale(knn_results$Risk_Score)
+
+# sort by risk
+knn_results <- knn_results[order(-knn_results$Risk_Score),]
+
+# results
+ggplot(knn_results, aes(x = reorder(City, Risk_Score), y = Risk_Score)) +
+  geom_col(fill = "steelblue") +
+  coord_flip() +
+  theme_minimal() +
+  labs(title = "Hurricane Risk by City (KNN Method)",
+       x = "City",
+       y = "Risk Score")
+
+print(knn_results)
+```
+
+
 =======
->>>>>>> c2b1439e3f0796ec95e5ff2027367daf3bb47a46
 \newpage
 
 #  Results
