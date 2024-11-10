@@ -512,7 +512,15 @@ print(knn_results)
 
 #  Results
 
-Discuss results of analysis
+In analyzing hurricane risk across the Gulf of Mexico region, we used two distinct analytical approaches, Kernel Density Estimation (KDE) and K-Nearest Neighbors (KNN).
+
+Kernel Density Estimation demonstrates notable effectiveness in capturing broad regional patterns, particularly along the U.S. Gulf Coast. The method identifies Miami (1.53), Biloxi (1.24), and Tampa (1.18) as high-risk areas, aligning with historically observed hurricane patterns in these regions. This approach appears to effectively capture the traditional understanding of Gulf Coast vulnerability, showing a consistent gradient of risk that decreases from the eastern U.S. coastline toward the western Gulf regions. Significantly, KDE identifies Coatzacoalcos (-2.14) and Veracruz (-1.51) as lowest-risk areas, suggesting a clear north-south divide in hurricane vulnerability.
+
+In contrast, the K-Nearest Neighbors approach presents a markedly different risk distribution. This method ranks Nassau (2.04) and Miami (1.77) as the highest-risk locations, while placing western cities like Houston (-1.65) and Campeche (-1.53) at the lower end of the risk spectrum. KNN's assessment appears more sensitive to individual storm characteristics and extreme events, potentially better reflecting the impact of recent hurricane patterns rather than historical trends. The method's city-by-city analysis provides a more granular view of risk, though it sometimes contradicts traditional understanding of regional vulnerability.
+
+The biggest contrast between these methods appears in their treatment of specific locations. Nassau is an example of this, ranking highest in KNN (2.04) but showing negative risk (-0.39) in KDE. Similarly, U.S. Gulf Coast cities receive consistently high scores in KDE but show more varied results in KNN, with some traditionally high-risk areas receiving surprisingly low scores. These differences highlight how each method weighs various risk factors: KDE emphasizes geographical patterns and storm frequency, while KNN focuses more on storm intensity and proximity.
+
+Despite their differences, both methods agree on certain fundamental patterns, particularly the lower risk levels in the western Gulf region. This adds credibility to both approaches while suggesting that comprehensive risk assessment should incorporate both methodologies.
 
 \newpage
 
